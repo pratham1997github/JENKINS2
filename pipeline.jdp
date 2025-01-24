@@ -11,12 +11,19 @@ pipeline {
                 sh '/opt/maven/bin/mvn clean package'
             }
         }
-        stage('Test') {
+        // stage('Test') {
+        //     steps {
+        //         sh '/opt/maven/bin/mvn sonar:sonar   -Dsonar.projectKey=studentapp   -Dsonar.host.url=http://13.232.19.67:9000   -Dsonar.login=5d3eb84fd6f33a5acf6fdaa2cb6ba675c55b88f2'
+        //     }
+        // }
+        stage('test') {
             steps {
-                sh '/opt/maven/bin/mvn sonar:sonar   -Dsonar.projectKey=studentapp   -Dsonar.host.url=http://13.232.19.67:9000   -Dsonar.login=5d3eb84fd6f33a5acf6fdaa2cb6ba675c55b88f2'
+                withSonarQubeEnv(installation: 'sonar', credentialsId: 'sonar-cred') {
+                 // some block
+                }
             }
         }
-          stage('Deploy') {
+        stage('Deploy') {
             steps {
                 echo 'Application Deployed'
             }
