@@ -19,7 +19,7 @@ pipeline {
         stage('test') {
             steps {
                 withSonarQubeEnv(installation: 'sonar', credentialsId: 'sonar-cred') {
-                 // some block
+                 sh '/opt/maven/bin/mvn sonar:sonar'
                 }
             }
         }
