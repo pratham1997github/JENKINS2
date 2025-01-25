@@ -21,14 +21,14 @@ pipeline {
                 stage('Quality-Gate') {
             steps {
                 timeout(10) {
-                   waitForQualityGate abortPipeline: true
+                   waitForQualityGate abortPipeline: te
                }
                  
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Application Deployed'
+                deploy adapters: [tomcat9(path: '', url: 'http://172.31.1.174:8080')], contextPath: '/', war: '**/*.war'
             }
         }
     }
